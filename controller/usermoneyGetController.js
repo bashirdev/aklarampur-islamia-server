@@ -12,6 +12,15 @@ try {
 }
 }
 
+//GET request by ID
+const getMemberById =async(req,res)=>{
+    try {
+        const findMember=await MemberProfile.findById({_id:req.params.id})
+        res.status(201).json(findMember)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
 
 //GET request for money due
 
@@ -65,6 +74,48 @@ const getNewTask=async(req,res)=>{
         res.status(404).json({message: error.message})
     }
 }
+//GET Find by id 
+const getNewTaskById=async(req,res)=>{
+    try {
+        const getById =await NEWTASK.findById({_id:req.params.id})
+        res.status(200).json(getById)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+//PUT Request for edit by ID
+const updateCampaignById=async(req,res)=>{
+    try {
+        const {taskname,date,description} = req.body;
+        const taskName =await NEWTASK.findById(req.params.id)
+        if(taskName){
+            taskName.taskname=taskname;
+            taskName.date=date;
+            taskName.description=description;
 
-export {getMembers, balanceMoney, gotMoneyPin, getNewTask, deleteMoneyPin, deleteDueMoney}
+            const saveTaskName = await taskName.save()
+            res.json(saveTaskName)
+        }else{
+            res.status(404)
+        }
+       
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+//DELETE campaign delete by id
+const campaignDeleteById=async(req,res)=>{
+    try {
+        const taskNameDelete =await NEWTASK.deleteOne({_id:req.params.id})
+        res.status(201).json(taskNameDelete)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+export {getMembers,getMemberById, balanceMoney,
+     gotMoneyPin, getNewTask, deleteMoneyPin,updateCampaignById,getNewTaskById,
+     campaignDeleteById,
+      deleteDueMoney}
 

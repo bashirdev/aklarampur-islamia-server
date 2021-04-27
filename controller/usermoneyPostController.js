@@ -58,13 +58,35 @@ const getPin=async(req,res)=>{
 //DELETE MEMBER DATA 
 const deleteMembers =async (req,res)=>{
     try {
-        const membersDelete=await MemberProfile.deleteMany({})
+        const membersDelete=await MemberProfile.deleteOne({_id: req.params.id})
         res.status(201).json(membersDelete)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+//update MEMBER DATA 
+const updateMember =async (req,res)=>{
+    try {
+        const {fullName, blood, mobile, address} =req.body;
+        const updateData=await MemberProfile.findById(req.params.id)
+        if(updateData){
+            updateData.fullName=fullName;
+            updateData.blood=blood;
+            updateData.mobile=mobile;
+            updateData.address=address;
+
+            const dataUpdate= await updateData.save()
+            res.json(dataUpdate)
+        }else{
+           res.status(404)
+        }
+
+       
     } catch (error) {
         res.status(404).json({message: error.message})
     }
 }
 
 
-   export {newPostData, getPin , profileData, deleteMembers, newTask }
+   export {newPostData, getPin , profileData, deleteMembers,updateMember, newTask }
 
