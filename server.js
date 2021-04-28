@@ -20,6 +20,9 @@ app.use(cors())
 //      useUnifiedTopology:true,
 
 //  })
+//git add .
+//git commit -m
+//$ git push heroku master
 configDB();
 app.use('/api', router)
 
