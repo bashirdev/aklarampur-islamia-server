@@ -50,6 +50,7 @@ const gotMoneyPin=async(req,res)=>{
      
     try {
         const gotBalance=await  Gotpin.find({})
+        
      res.status(200).json(gotBalance) 
     } catch (error) {
         res.status(404).json({message: error.message}) 

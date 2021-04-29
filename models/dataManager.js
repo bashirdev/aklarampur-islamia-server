@@ -15,10 +15,11 @@ export const UserMoney=mongoose.model('UserMoney', moneyCollectionSchema);
 const gotPinSchema=mongoose.Schema(
     {
         fullName:String,
-        pin:String, 
         date:String,
-        amount:String,
-        status:String,
+        pin:String, 
+        mobilePin:String,
+       amount:String,
+       
          
     }
 );

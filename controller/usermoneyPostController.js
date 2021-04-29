@@ -19,10 +19,11 @@ const newPostData=async (req,res)=>{
 //all ready send money POST api
 
 const getPin=async(req,res)=>{
-   
+    
     try {
        const sentMoney=req.body;
-        const getMoneyPin=await Gotpin.create(sentMoney)
+        const getMoneyPin= await Gotpin.create(sentMoney)
+       
         res.status(200).json(getMoneyPin)
     } catch (error) {
        res.status(404).json({message: error.message})
