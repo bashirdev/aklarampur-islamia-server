@@ -1,5 +1,5 @@
 
-import { Gotpin, MemberProfile, UserMoney, NEWTASK } from '../models/dataManager.js';
+import { Gotpin, POST, MemberProfile, UserMoney, NEWTASK } from '../models/dataManager.js';
 
 
 
@@ -46,6 +46,48 @@ const getPin=async(req,res)=>{
        }
    }
 
+   //POST post data blog
+   const postData =async (req,res)=>{
+       
+       try {
+          const post =req.body;
+          const newPost = await POST.create(post) 
+          res.status(200).json(newPost)
+       } catch (error) {
+        res.status(404).json({message: error.message})
+       }
+   } 
+
+   //DELETE Blog post data
+   const deleteBlogPost=async (req,res)=>{
+       try {
+           const deltePost=await POST.deleteOne({_id:req.params.id})
+           res.status(201).json(deltePost)
+       } catch (error) {
+        res.status(404).json({message: error.message}) 
+       }
+   }
+
+   //UPDATE Blog post Data
+
+const BlogPostUpdate =async (req,res)=>{
+    try {
+        const {title, author, content} = req.body;
+        const updatePost =await POST.findById(req.params.id)
+        if(updatePost){
+            updatePost.title=title;
+            updatePost.author=author;
+            updatePost.content=content;
+            const saveUpdate = updatePost.save()
+            res.json(saveUpdate)
+        }
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+
+
+   //POST task data
    const newTask =async (req,res)=>{
        try {
           const newTasks= req.body;
@@ -89,5 +131,5 @@ const updateMember =async (req,res)=>{
 }
 
 
-   export {newPostData, getPin , profileData, deleteMembers,updateMember, newTask }
+   export {newPostData,postData, deleteBlogPost,BlogPostUpdate, getPin , profileData, deleteMembers,updateMember, newTask }
 

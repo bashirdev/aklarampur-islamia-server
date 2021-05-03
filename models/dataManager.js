@@ -38,7 +38,15 @@ const userProfileSchema = mongoose.Schema(
    
 );
 
+const postDataSchema =mongoose.Schema({
+    title:String,
+    content:String,
+    author:String,
+    date:String,
+    
+})
 
+export const POST =mongoose.model('POST', postDataSchema )
 
 export const MemberProfile = mongoose.model('MemberProfile', userProfileSchema);
 
