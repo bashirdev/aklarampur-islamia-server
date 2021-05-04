@@ -1,5 +1,5 @@
 
-import { Gotpin, MemberProfile, NEWTASK, POST, UserMoney } from '../models/dataManager.js';
+import { COST, Gotpin, MemberProfile, NEWTASK, POST, UserMoney } from '../models/dataManager.js';
 
 
 //Get request For all members
@@ -17,6 +17,15 @@ const getPostBlog=async(req,res)=>{
     try {
         const getPost = await POST.find({})
         res.status(200).json(getPost)
+    } catch (error) {
+        res.status(404).json({message: error.message})
+    }
+}
+//GET Cost data
+const getCostData=async(req,res)=>{
+    try {
+        const getCost = await COST.find({})
+        res.status(200).json(getCost)
     } catch (error) {
         res.status(404).json({message: error.message})
     }
@@ -137,5 +146,5 @@ const campaignDeleteById=async(req,res)=>{
 export {getMembers,getMemberById, balanceMoney,
      gotMoneyPin, getNewTask, deleteMoneyPin,updateCampaignById,getNewTaskById,
      campaignDeleteById,
-      deleteDueMoney,getPostBlogById, getPostBlog}
+      deleteDueMoney,getPostBlogById, getPostBlog, getCostData}
 

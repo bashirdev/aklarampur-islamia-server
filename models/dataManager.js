@@ -48,6 +48,12 @@ const postDataSchema =mongoose.Schema({
 
 export const POST =mongoose.model('POST', postDataSchema )
 
+const costSchema =mongoose.Schema({
+    description:String,
+    cost:String,
+    date:String,
+})
+export const COST =mongoose.model('COST', costSchema)
 export const MemberProfile = mongoose.model('MemberProfile', userProfileSchema);
 
 const newTaskSchema= mongoose.Schema(
